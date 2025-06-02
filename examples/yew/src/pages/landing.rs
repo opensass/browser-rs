@@ -159,7 +159,7 @@ pub fn landing_page() -> Html {
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <div class="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-lg">
                     <h2 class="text-xl font-semibold mb-4 text-gray-800">
-                        { "BrowserFrame Sizes" }
+                        { "Small BrowserFrame" }
                     </h2>
                     <pre class="w-full text-xs bg-gray-800 text-gray-100 p-4 rounded mb-4 overflow-x-auto">
 { r#"use yew::prelude::*;

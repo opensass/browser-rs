@@ -21,7 +21,10 @@ pub struct AddressBarProps {
 
     #[prop_or_default]
     pub class: &'static str,
-    #[prop_or_default]
+
+    #[prop_or(
+        "flex: 1; margin-left: 1rem; margin-right: 1rem; border: 1px solid #d1d5db; border-radius: 0.375rem; padding-left: 0.75rem; padding-right: 0.75rem; font-size: 0.875rem; position: relative;"
+    )]
     pub style: &'static str,
 
     #[prop_or("Website address or search query")]
@@ -31,20 +34,24 @@ pub struct AddressBarProps {
     #[prop_or("browser-url-input")]
     pub input_id: &'static str,
 
-    #[prop_or("w-full text-gray-900 dark:text-white bg-white dark:bg-gray-700 pr-8")]
+    #[prop_or("text-black dark:text-white")]
     pub input_class: &'static str,
 
-    #[prop_or(
-        "flex-1 mx-4 border border-gray-300 dark:border-gray-500 rounded-md px-3 py-1 bg-transparent text-sm relative bg-white dark:bg-gray-700"
-    )]
+    #[prop_or_default]
     pub container_class: &'static str,
 
     #[prop_or(
-        "position: absolute; top: 50%; right: 8px; transform: translateY(-50%); padding: 4px; border: none; cursor: pointer; color: #d1d5db;"
+        "position: absolute; top: 50%; right: 8px; transform: translateY(-50%); padding: 4px; background: none; border: none; box-shadow: none; outline: none; cursor: pointer;"
     )]
     pub refresh_button_style: &'static str,
+
     #[prop_or("Refresh")]
     pub refresh_button_aria_label: &'static str,
+
+    #[prop_or(
+        "background-color: transparent; padding-right: 2rem; border: none; outline: none; box-shadow: none; height: 100%;"
+    )]
+    pub input_style: &'static str,
 }
 
 #[function_component(AddressBar)]
@@ -128,6 +135,7 @@ pub fn address_bar(props: &AddressBarProps) -> Html {
                 placeholder={props.placeholder}
                 readonly={props.read_only}
                 class={props.input_class}
+                style={props.input_style}
                 aria-describedby={props.describedby}
                 autocomplete="url"
                 spellcheck={Some("false")}
@@ -204,9 +212,9 @@ pub struct ControlButtonProps {
     pub on_blur: Callback<FocusEvent>,
 
     #[prop_or(
-        "w-5 h-5 flex items-center justify-center rounded-full transition-all duration-200 cursor-pointer"
+        "width: 1rem; height: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; cursor: pointer; background: none; border: none; padding: 0; margin-right: 0.5rem;"
     )]
-    pub base_class: &'static str,
+    pub style: &'static str,
     #[prop_or_default]
     pub class: &'static str,
     #[prop_or_default]
@@ -233,8 +241,8 @@ pub fn control_button(props: &ControlButtonProps) -> Html {
         on_mouse_out,
         on_focus,
         on_blur,
-        base_class,
         class,
+        style,
         svg_class,
         path_class,
         button_type,
@@ -242,8 +250,6 @@ pub fn control_button(props: &ControlButtonProps) -> Html {
         title,
         tabindex,
     } = props.clone();
-
-    let full_class = format!("{} {}", base_class, class);
 
     let aria_label = if aria_label.is_empty() {
         r#type.default_aria_label()
@@ -269,7 +275,8 @@ pub fn control_button(props: &ControlButtonProps) -> Html {
     html! {
         <button
             type={button_type}
-            class={full_class}
+            class={class}
+            style={style}
             onclick={onclick}
             onmouseover={onmouseover}
             onmouseout={onmouseout}
@@ -302,8 +309,10 @@ pub fn control_button(props: &ControlButtonProps) -> Html {
 pub struct BrowserControlsProps {
     #[prop_or_default]
     pub show_controls: bool,
-    #[prop_or("flex items-center px-3 py-2 bg-gray-200 rounded-t-lg")]
+    #[prop_or_default]
     pub class: &'static str,
+    #[prop_or("display: flex; align-items: center; background: none; padding-left: 10px;")]
+    pub style: &'static str,
 
     #[prop_or_default]
     pub on_close: Callback<()>,
@@ -340,7 +349,7 @@ pub struct BrowserControlsProps {
     pub on_minimize_focus: Callback<FocusEvent>,
     #[prop_or_default]
     pub on_minimize_blur: Callback<FocusEvent>,
-    #[prop_or("ml-2")]
+    #[prop_or_default]
     pub minimize_class: &'static str,
     #[prop_or_default]
     pub minimize_svg_class: &'static str,
@@ -365,7 +374,7 @@ pub struct BrowserControlsProps {
     pub on_maximize_focus: Callback<FocusEvent>,
     #[prop_or_default]
     pub on_maximize_blur: Callback<FocusEvent>,
-    #[prop_or("ml-2")]
+    #[prop_or_default]
     pub maximize_class: &'static str,
     #[prop_or_default]
     pub maximize_svg_class: &'static str,
@@ -388,7 +397,7 @@ pub fn browser_controls(props: &BrowserControlsProps) -> Html {
     }
 
     html! {
-        <nav class={props.class} role="toolbar" aria-label="Browser window controls">
+        <nav class={props.class} style={props.style} role="toolbar" aria-label="Browser window controls">
             <ControlButton
                 r#type={ButtonType::Close}
                 on_click={props.on_close.clone()}
@@ -461,20 +470,18 @@ pub struct BrowserHeaderProps {
     #[prop_or_default]
     pub class: &'static str,
 
-    #[prop_or(
-        "flex-1 mx-4 border border-gray-300 dark:border-gray-500 rounded-md px-3 py-1 bg-transparent text-sm relative bg-white dark:bg-gray-700"
-    )]
+    #[prop_or_default]
     pub container_class: &'static str,
-    #[prop_or("w-full text-gray-900 dark:text-white bg-white dark:bg-gray-700 pr-8")]
+    #[prop_or("text-black dark:text-white")]
     pub input_class: &'static str,
-    #[prop_or(
-        "position: absolute; top: 50%; right: 8px; transform: translateY(-50%); padding: 4px; border: none; cursor: pointer; color: #d1d5db;"
-    )]
+    #[prop_or_default]
     pub refresh_button_style: &'static str,
     #[prop_or("Refresh")]
     pub refresh_button_aria_label: &'static str,
 
-    #[prop_or("padding: 4px; border: none; cursor: pointer; color: #d1d5db;")]
+    #[prop_or(
+        "padding: 4px; cursor: pointer; background: none; border: none; box-shadow: none; outline: none;"
+    )]
     pub icon_button_style: &'static str,
 
     #[prop_or("flex: 1; display: flex; justify-content: center; padding-right: 8px;")]
@@ -518,7 +525,7 @@ pub struct BrowserHeaderProps {
     pub on_minimize_focus: Callback<FocusEvent>,
     #[prop_or_default]
     pub on_minimize_blur: Callback<FocusEvent>,
-    #[prop_or("ml-2")]
+    #[prop_or_default]
     pub minimize_class: &'static str,
     #[prop_or_default]
     pub minimize_svg_class: &'static str,
@@ -543,7 +550,7 @@ pub struct BrowserHeaderProps {
     pub on_maximize_focus: Callback<FocusEvent>,
     #[prop_or_default]
     pub on_maximize_blur: Callback<FocusEvent>,
-    #[prop_or("ml-2")]
+    #[prop_or_default]
     pub maximize_class: &'static str,
     #[prop_or_default]
     pub maximize_svg_class: &'static str,
@@ -1050,6 +1057,10 @@ pub struct BrowserFrameProps {
     )]
     pub class: &'static str,
 
+    /// CSS classes for styling the browser frame.
+    #[prop_or_default]
+    pub frame_class: &'static str,
+
     /// Inline styles for the outer container.
     #[prop_or_default]
     pub style: &'static str,
@@ -1069,24 +1080,18 @@ pub struct BrowserFrameProps {
     pub aria_describedby: &'static str,
 
     /// CSS classes for the address bar container.
-    ///
-    /// Defaults to: `"flex-1 mx-4 border border-gray-300 dark:border-gray-500 rounded-md px-3 py-1 bg-transparent text-sm relative bg-white dark:bg-gray-700"`.
-    #[prop_or(
-        "flex-1 mx-4 border border-gray-300 dark:border-gray-500 rounded-md px-3 py-1 bg-transparent text-sm relative bg-white dark:bg-gray-700"
-    )]
+    #[prop_or_default]
     pub container_class: &'static str,
 
     /// CSS classes for the address bar input element.
-    ///
-    /// Defaults to: `"w-full text-gray-900 dark:text-white bg-white dark:bg-gray-700 pr-8"`.
-    #[prop_or("w-full text-gray-900 dark:text-white bg-white dark:bg-gray-700 pr-8")]
+    #[prop_or("text-black dark:text-white")]
     pub input_class: &'static str,
 
     /// Inline styles for the refresh button.
     ///
-    /// Defaults to: `"position: absolute; top: 50%; right: 8px; transform: translateY(-50%); padding: 4px; border: none; cursor: pointer; color: #d1d5db;"`.
+    /// Defaults to: `"position: absolute; top: 50%; right: 8px; transform: translateY(-50%); padding: 4px; background: none; border: none; box-shadow: none; outline: none; cursor: pointer;"`.
     #[prop_or(
-        "position: absolute; top: 50%; right: 8px; transform: translateY(-50%); padding: 4px; border: none; cursor: pointer; color: #d1d5db;"
+        "position: absolute; top: 50%; right: 8px; transform: translateY(-50%); padding: 4px; background: none; border: none; box-shadow: none; outline: none; cursor: pointer;"
     )]
     pub refresh_button_style: &'static str,
 
@@ -1098,8 +1103,10 @@ pub struct BrowserFrameProps {
 
     /// Inline styles for icon buttons (close, minimize, maximize).
     ///
-    /// Defaults to: `"padding: 4px; border: none; cursor: pointer; color: #d1d5db;"`.
-    #[prop_or("padding: 4px; border: none; cursor: pointer; color: #d1d5db;")]
+    /// Defaults to: `"padding: 4px; cursor: pointer; background: none; border: none; box-shadow: none; outline: none;"`.
+    #[prop_or(
+        "padding: 4px; cursor: pointer; background: none; border: none; box-shadow: none; outline: none;"
+    )]
     pub icon_button_style: &'static str,
 
     /// Inline styles for the address bar wrapper.
@@ -1147,7 +1154,7 @@ pub struct BrowserFrameProps {
     pub on_minimize_focus: Callback<FocusEvent>,
     #[prop_or_default]
     pub on_minimize_blur: Callback<FocusEvent>,
-    #[prop_or("ml-2")]
+    #[prop_or_default]
     pub minimize_class: &'static str,
     #[prop_or_default]
     pub minimize_svg_class: &'static str,
@@ -1171,7 +1178,7 @@ pub struct BrowserFrameProps {
     pub on_maximize_focus: Callback<FocusEvent>,
     #[prop_or_default]
     pub on_maximize_blur: Callback<FocusEvent>,
-    #[prop_or("ml-2")]
+    #[prop_or_default]
     pub maximize_class: &'static str,
     #[prop_or_default]
     pub maximize_svg_class: &'static str,
@@ -1358,7 +1365,7 @@ pub fn browser_frame(props: &BrowserFrameProps) -> Html {
                 variant={props.variant.clone()}
                 size={props.size.clone()}
                 custom_buttons={props.custom_buttons.clone()}
-                class=""
+                class={props.frame_class}
                 container_class={props.container_class}
                 input_class={props.input_class}
                 refresh_button_style={props.refresh_button_style}
