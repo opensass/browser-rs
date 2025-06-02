@@ -96,37 +96,78 @@ pub fn app() -> Html {
 
 ## 🔧 Props
 
-### `BrowserFrameProps`
+| Property                     | Type                           | Default Value                          | Description                                                      |
+| ---------------------------- | ------------------------------ | -------------------------------------- | ---------------------------------------------------------------- |
+| `children`                   | `Children`                     | `""`                                   | The child components to render inside the browser frame.         |
+| `url`                        | `String`                       | `""`                                   | The current URL displayed in the address bar.                    |
+| `placeholder`                | `&'static str`                 | `""`                                   | Placeholder text for the address bar input.                      |
+| `on_url_change`              | `Option<Callback<InputEvent>>` | `None`                                 | Triggered when the address bar's URL is edited by the user.      |
+| `on_close`                   | `Callback<()>`                 | No-op callback                         | Called when the close button is clicked.                         |
+| `on_minimize`                | `Callback<()>`                 | No-op callback                         | Called when the minimize button is clicked.                      |
+| `on_maximize`                | `Callback<()>`                 | No-op callback                         | Called when the maximize button is clicked.                      |
+| `show_controls`              | `bool`                         | `true`                                 | Whether to show the window controls (close, minimize, maximize). |
+| `show_address_bar`           | `bool`                         | `true`                                 | Whether to display the address bar.                              |
+| `read_only`                  | `bool`                         | `false`                                | If `true`, the address bar input is read-only.                   |
+| `size`                       | `Size`                         | `Medium`                               | Sets the browser frame size (`Small`, `Medium`, `Large`).        |
+| `variant`                    | `Variant`                      | `Default`                              | Visual variant of the browser frame.                             |
+| `custom_buttons`             | `Vec<Html>`                    | `[]`                                   | Optional custom buttons to render in the header.                 |
+| `class`                      | `&'static str`                 | `"rounded-lg border shadow-lg..."`     | Outer container CSS classes.                                     |
+| `frame_class`                | `&'static str`                 | `""`                                   | Additional CSS classes for the frame element.                    |
+| `style`                      | `&'static str`                 | `""`                                   | Inline styles for the outer container.                           |
+| `id`                         | `&'static str`                 | `""`                                   | Optional container ID.                                           |
+| `aria_label`                 | `&'static str`                 | `"Browser window"`                     | ARIA label for the browser frame container.                      |
+| `aria_describedby`           | `&'static str`                 | `""`                                   | ARIA description for the browser frame.                          |
+| `container_class`            | `&'static str`                 | `""`                                   | CSS classes for the address bar container.                       |
+| `input_class`                | `&'static str`                 | `"text-black dark:text-white"`         | CSS classes for the address input element.                       |
+| `refresh_button_style`       | `&'static str`                 | `"position: absolute; ..."`            | Inline styles for the refresh button.                            |
+| `refresh_button_aria_label`  | `&'static str`                 | `"Refresh"`                            | ARIA label for the refresh button.                               |
+| `icon_button_style`          | `&'static str`                 | `"padding: 4px; cursor: pointer; ..."` | Inline styles for icon buttons (close, minimize, maximize).      |
+| `address_wrapper_base_style` | `&'static str`                 | `"flex: 1; display: ..."`              | Style for the address bar wrapper.                               |
+| `header_base_style`          | `&'static str`                 | `"display: flex; align-items: ..."`    | Style for the header container.                                  |
 
-| Property                              | Type                           | Description                                    | Default            |
-| ------------------------------------- | ------------------------------ | ---------------------------------------------- | ------------------ |
-| `children`                            | `Children`                     | Content inside the browser frame               | `""`               |
-| `url`                                 | `String`                       | The address bar's displayed URL                | `""`               |
-| `placeholder`                         | `&'static str`                 | Address bar placeholder                        | `""`               |
-| `on_url_change`                       | `Option<Callback<InputEvent>>` | Triggered when user edits the address bar      | `None`             |
-| `on_close`                            | `Callback<()>`                 | Called when close button is clicked            | `noop`             |
-| `on_minimize`                         | `Callback<()>`                 | Called when minimize button is clicked         | `noop`             |
-| `on_maximize`                         | `Callback<()>`                 | Called when maximize button is clicked         | `noop`             |
-| `show_controls`                       | `bool`                         | Toggles window controls                        | `true`             |
-| `show_address_bar`                    | `bool`                         | Toggles visibility of the address bar          | `true`             |
-| `read_only`                           | `bool`                         | Makes the address bar read-only                | `false`            |
-| `size`                                | `Size`                         | Sets browser frame size                        | `Medium`           |
-| `variant`                             | `Variant`                      | Sets visual variant                            | `Default`          |
-| `custom_buttons`                      | `Vec<Html>`                    | Custom buttons rendered in the header          | `[]`               |
-| `class`                               | `&'static str`                 | Outer container classes                        | See source         |
-| `style`                               | `&'static str`                 | Outer container inline style                   | `""`               |
-| `id`                                  | `&'static str`                 | Optional container ID                          | `""`               |
-| `aria_label`                          | `&'static str`                 | ARIA label for accessibility                   | `"Browser window"` |
-| `aria_describedby`                    | `&'static str`                 | ARIA description                               | `""`               |
-| `container_class`                     | `&'static str`                 | Address bar container classes                  | See source         |
-| `input_class`                         | `&'static str`                 | Address input classes                          | See source         |
-| `refresh_button_style`                | `&'static str`                 | Inline style for refresh button                | See source         |
-| `refresh_button_aria_label`           | `&'static str`                 | ARIA label for refresh button                  | `"Refresh"`        |
-| `icon_button_style`                   | `&'static str`                 | Icon button inline style                       | See source         |
-| `address_wrapper_base_style`          | `&'static str`                 | Address bar wrapper style                      | See source         |
-| `header_base_style`                   | `&'static str`                 | Header wrapper style                           | See source         |
-| `close_*`, `minimize_*`, `maximize_*` | Various                        | Complete control over all icon buttons         | See source         |
-| `share_*`, `tabs_*`, `more_*`         | Various                        | Control optional share, tabs, and menu buttons | See source         |
+#### Close button (`close_*`)
+
+| Property              | Type                   | Default    | Description                                        |
+| --------------------- | ---------------------- | ---------- | -------------------------------------------------- |
+| `on_close_mouse_over` | `Callback<()>`         | No-op      | Called on mouse over the close button.             |
+| `on_close_mouse_out`  | `Callback<()>`         | No-op      | Called on mouse out of the close button.           |
+| `on_close_focus`      | `Callback<FocusEvent>` | No-op      | Called when the close button gains focus.          |
+| `on_close_blur`       | `Callback<FocusEvent>` | No-op      | Called when the close button loses focus.          |
+| `close_class`         | `&'static str`         | `""`       | CSS class for the close button.                    |
+| `close_svg_class`     | `&'static str`         | `""`       | CSS class for the close button's SVG element.      |
+| `close_path_class`    | `&'static str`         | `""`       | CSS class for the close button's SVG path.         |
+| `close_button_type`   | `&'static str`         | `"button"` | The `type` attribute for the close button element. |
+| `close_aria_label`    | `&'static str`         | `""`       | ARIA label for the close button.                   |
+| `close_title`         | `&'static str`         | `""`       | Title attribute for the close button.              |
+| `close_tabindex`      | `&'static str`         | `"0"`      | Tab index for keyboard navigation.                 |
+
+#### Minimize button (`minimize_*`)
+
+_(Same structure as above)_
+
+#### Maximize button (`maximize_*`)
+
+_(Same structure as above)_
+
+#### Share button (`share_*`)
+
+| Property             | Type                   | Default | Description                         |
+| -------------------- | ---------------------- | ------- | ----------------------------------- |
+| `share_button_style` | `&'static str`         | `""`    | Inline styles for the share button. |
+| `share_onclick`      | `Callback<()>`         | No-op   | Called on click.                    |
+| `share_onmouseover`  | `Callback<()>`         | No-op   | Called on mouse over.               |
+| `share_onmouseout`   | `Callback<()>`         | No-op   | Called on mouse out.                |
+| `share_onfocus`      | `Callback<FocusEvent>` | No-op   | Called on focus.                    |
+| `share_onblur`       | `Callback<FocusEvent>` | No-op   | Called on blur.                     |
+| `share_tabindex`     | `&'static str`         | `""`    | Tab index for accessibility.        |
+
+#### Tabs button (`tabs_*`)
+
+_(Same structure as share button)_
+
+#### More button (`more_*`)
+
+_(Same structure as share button)_
 
 ## 💡 Notes
 
