@@ -2920,9 +2920,9 @@ checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
 
 [[package]]
 name = "leptos"
-version = "0.8.1"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3f1819eec875169e4686cd21d212d8878ed7d2c5dbd2b6e35f40b7ad95ee260a"
+checksum = "2ceaf7d86820125c57dcd380edac4b972debf480ee4c7eea6dd7cea212615978"
 dependencies = [
  "any_spawner",
  "cfg-if",
@@ -2943,7 +2943,7 @@ dependencies = [
  "send_wrapper",
  "serde",
  "serde_qs 0.14.0",
- "server_fn 0.8.1",
+ "server_fn 0.8.2",
  "slotmap",
  "tachys",
  "thiserror 2.0.12",
@@ -2956,9 +2956,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_config"
-version = "0.8.1"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "419998a7004aa46d782c73364766827aeb1f7bd6208183822ac1c5012b6e3565"
+checksum = "cf4100ad54455f82b686c9d0500a45c909eb50ce68ccb2ed51439ff2596f54fd"
 dependencies = [
  "config",
  "regex",
@@ -2969,9 +2969,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_dom"
-version = "0.8.1"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6493304626bd4e0ad384c2c568bd21d82ad71a54a9d679dd3807535c28654844"
+checksum = "adaca2ec1d6215a7c43dc6353d487e4e34faf325b8e4df2ca3df488964d403be"
 dependencies = [
  "js-sys",
  "or_poisoned",
@@ -2984,9 +2984,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_hot_reload"
-version = "0.8.1"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8962a6a06c1f9d7e29013060f838c69270984dd066fc31587a1eec428d7b03be"
+checksum = "597f84532609518092960ac241741963c90c216ee11f752e1b238b846f043640"
 dependencies = [
  "anyhow",
  "camino",
@@ -3002,9 +3002,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_macro"
-version = "0.8.1"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "494449c0eaaede38c4b5382bbcf4bf38e295507df3341f6094c7829da8c8f443"
+checksum = "8a2ec91579e9a1344adc1eee637cb774a01354a3d25857cbd028b0289efe131d"
 dependencies = [
  "attribute-derive",
  "cfg-if",
@@ -3018,16 +3018,16 @@ dependencies = [
  "quote",
  "rstml",
  "rustc_version",
- "server_fn_macro 0.8.1",
+ "server_fn_macro 0.8.2",
  "syn 2.0.101",
  "uuid",
 ]
 
 [[package]]
 name = "leptos_server"
-version = "0.8.1"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ee74dc2f754034a01018c7d9403f042b247ddc12387acf0ed87b464f7bddf111"
+checksum = "5af59932aa8a640da4d3d20650cf07084433e25db0ee690203d893b81773db29"
 dependencies = [
  "any_spawner",
  "base64",
@@ -3039,7 +3039,7 @@ dependencies = [
  "send_wrapper",
  "serde",
  "serde_json",
- "server_fn 0.8.1",
+ "server_fn 0.8.2",
  "tachys",
 ]
 
@@ -3890,9 +3890,9 @@ dependencies = [
 
 [[package]]
 name = "server_fn"
-version = "0.8.1"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a44f68021821254ab4a28c44ab1a42ea5563a36797afdae90b1a4dc14de98156"
+checksum = "09b0f92b9d3a62c73f238ac21f7a09f15bad335a9d1651514d9da80d2eaf8d4c"
 dependencies = [
  "base64",
  "bytes",
@@ -3911,7 +3911,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_qs 0.14.0",
- "server_fn_macro_default 0.8.1",
+ "server_fn_macro_default 0.8.2",
  "thiserror 2.0.12",
  "throw_error",
  "url",
@@ -3938,9 +3938,9 @@ dependencies = [
 
 [[package]]
 name = "server_fn_macro"
-version = "0.8.1"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5a20c322c5695f689d30e9ee32f331acc93fd0447a18aa004d96882f5007f368"
+checksum = "341dd1087afe9f3e546c5979a4f0b6d55ac072e1201313f86e7fe364223835ac"
 dependencies = [
  "const_format",
  "convert_case 0.8.0",
@@ -3963,11 +3963,11 @@ dependencies = [
 
 [[package]]
 name = "server_fn_macro_default"
-version = "0.8.1"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d5e5f79c534735feb3ac913d2507aa630a25610d26f4f526e55a4def216de744"
+checksum = "bc5ab934f581482a66da82f2b57b15390ad67c9ab85bd9a6c54bb65060fb1380"
 dependencies = [
- "server_fn_macro 0.8.1",
+ "server_fn_macro 0.8.2",
  "syn 2.0.101",
 ]
 
