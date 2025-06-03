@@ -105,6 +105,7 @@ pub fn AddressBar(props: AddressBarProps) -> Element {
                 live_region.set_attribute("aria-live", "polite").unwrap();
                 live_region.set_attribute("aria-atomic", "true").unwrap();
                 live_region.set_class_name("sr-only");
+                live_region.set_attribute("style", "position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;").unwrap();
                 live_region
                     .set_text_content(Some(&format!("Navigating to {}", input_value.read())));
                 document.body().unwrap().append_child(&live_region).unwrap();
@@ -125,6 +126,7 @@ pub fn AddressBar(props: AddressBarProps) -> Element {
             label {
                 r#for: "{props.input_id}",
                 class: "sr-only",
+                style: "position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;",
                 "{props.label}"
             }
             input {

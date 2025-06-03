@@ -94,6 +94,7 @@ pub fn address_bar(props: &AddressBarProps) -> Html {
                 live_region.set_attribute("aria-live", "polite").unwrap();
                 live_region.set_attribute("aria-atomic", "true").unwrap();
                 live_region.set_class_name("sr-only");
+                live_region.set_attribute("style", "position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;").unwrap();
                 live_region.set_text_content(Some(&format!("Navigating to {}", value)));
                 document.body().unwrap().append_child(&live_region).unwrap();
 
@@ -122,7 +123,13 @@ pub fn address_bar(props: &AddressBarProps) -> Html {
 
     html! {
         <div class={format!("{} {}", props.container_class, props.class)} style={props.style}>
-            <label for={props.input_id} class="sr-only">{ props.label }</label>
+            <label
+                for={props.input_id}
+                class="sr-only"
+                style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;"
+            >
+                { props.label }
+            </label>
             <input
                 ref={input_ref.clone()}
                 id={props.input_id}
@@ -397,7 +404,12 @@ pub fn browser_controls(props: &BrowserControlsProps) -> Html {
     }
 
     html! {
-        <nav class={props.class} style={props.style} role="toolbar" aria-label="Browser window controls">
+        <nav
+            class={props.class}
+            style={props.style}
+            role="toolbar"
+            aria-label="Browser window controls"
+        >
             <ControlButton
                 r#type={ButtonType::Close}
                 on_click={props.on_close.clone()}

@@ -1,13 +1,12 @@
 use browser_rs::dioxus::BrowserFrame;
 use browser_rs::{Size, Variant};
 use dioxus::prelude::*;
-use dioxus::prelude::*;
 use dioxus_logger::tracing;
 use theme::dioxus::{use_theme, ThemeProvider};
 use theme::Theme;
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");
-const HEADER_SVG: Asset = asset!("/assets/header.svg");
+// const HEADER_SVG: Asset = asset!("/assets/header.svg");
 // const MAIN_CSS: Asset = asset!("/assets/styles.css");
 const TAILWIND_CSS: Asset = asset!("/assets/output.css");
 
@@ -68,7 +67,6 @@ fn ThemeToggle() -> Element {
         }
     }
 }
-use dioxus::prelude::*;
 
 #[derive(PartialEq, Props, Clone)]
 struct ControlsProps {
@@ -84,15 +82,15 @@ fn ControlsPanel(mut props: ControlsProps) -> Element {
         props.url.set(e.value());
     };
 
-    let on_show_controls_change = move |e: Event<FormData>| {
+    let on_show_controls_change = move |_e: Event<FormData>| {
         props.show_controls.set(!(props.show_controls)());
     };
 
-    let on_show_address_bar_change = move |e: Event<FormData>| {
+    let on_show_address_bar_change = move |_e: Event<FormData>| {
         props.show_address_bar.set(!(props.show_controls)());
     };
 
-    let on_read_only_change = move |e: Event<FormData>| {
+    let on_read_only_change = move |_e: Event<FormData>| {
         props.read_only.set(!(props.show_controls)());
     };
 
@@ -181,16 +179,14 @@ fn Examples() -> Element {
                     pre {
                         class: "w-full text-xs bg-gray-800 text-gray-100 p-4 rounded mb-4 overflow-x-auto",
                         r##"use dioxus::prelude::*;
-use browser_rs::BrowserFrame;
+use browser_rs::dioxus::BrowserFrame;
 use browser_rs::{{Size, Variant}};
 
 #[component]
 fn Example() -> Element {{
-    let url = use_signal(|| "https://opensass.org".to_string());
+    let mut url = use_signal(|| "https://opensass.org".to_string());
     let on_url_change = move |e: Event<FormData>| {{
-        if let Some(value) = e.value() {{
-            url.set(value);
-        }}
+        url.set(e.value());
     }};
 
     rsx! {{
@@ -226,16 +222,14 @@ fn Example() -> Element {{
                     pre {
                         class: "w-full text-xs bg-gray-800 text-gray-100 p-4 rounded mb-4 overflow-x-auto",
                         r##"use dioxus::prelude::*;
-use browser_rs::BrowserFrame;
+use browser_rs::dioxus::BrowserFrame;
 use browser_rs::{{Size, Variant}};
 
 #[component]
 fn Example() -> Element {{
-    let url = use_signal(|| "https://opensass.org".to_string());
+    let mut url = use_signal(|| "https://opensass.org".to_string());
     let on_url_change = move |e: Event<FormData>| {{
-        if let Some(value) = e.value() {{
-            url.set(value);
-        }}
+        url.set(e.value());
     }};
 
     rsx! {{
@@ -293,7 +287,7 @@ fn Example() -> Element {{
                     pre {
                         class: "w-full text-xs bg-gray-800 text-gray-100 p-4 rounded mb-4 overflow-x-auto",
                         r##"use dioxus::prelude::*;
-use browser_rs::BrowserFrame;
+use browser_rs::dioxus::BrowserFrame;
 use browser_rs::{{Size, Variant}};
 
 #[component]
